@@ -1,0 +1,61 @@
+import shiffman.box2d.*;
+import org.jbox2d.collision.shapes.*;
+import org.jbox2d.common.*;
+import org.jbox2d.dynamics.*;
+
+Box2DProcessing box2d;
+
+ArrayList<Box> boxes;
+
+void setup() {
+  
+  size(800, 500);
+  smooth();
+
+  box2d = new Box2DProcessing(this);
+  box2d.createWorld();
+  box2d.setGravity(0, -20);
+
+  boxes = new ArrayList<Box>();
+}
+
+void draw() {
+  
+  background(10);
+  
+  Box l = new Box(random(-400, 1200), -10, 80, 255, 255, 0);
+  boxes.add(l);
+  
+  Box x = new Box(random(-400, 1200), -10, 80, 255, 82, 82);
+  boxes.add(x);
+
+  Box a = new Box(random(-400, 1200), -10, 80, 207, 255, 0);
+  boxes.add(a);
+
+  Box p = new Box(random(-400, 1200), -10, 80, 100, 255, 255);
+  boxes.add(p);
+
+  Box c = new Box(random(-400, 1200), -10, 80, 255, 100, 255);
+  boxes.add(c);
+
+  box2d.step();
+
+  for (Box b : boxes) {
+    b.display();
+  }
+
+  for (int i = boxes.size()-1; i >= 0; i--) {
+    Box b = boxes.get(i);
+    if (b.done()) {
+      boxes.remove(i);
+    }
+  }
+  
+  fill(255);
+  text("Presiona las teclas de direccion para controlar las partículas",20,480);
+  
+}
+
+void keyReleased() {
+  key = 'p';
+}
