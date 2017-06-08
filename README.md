@@ -1,2 +1,0 @@
-# TrabajoCuatro-
-Trabajo Cuatro
